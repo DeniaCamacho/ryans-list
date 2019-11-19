@@ -1,29 +1,23 @@
 import React from "react"
-import { useUsers } from "../hooks"
-import Main from "./main"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import Categories from "./CategoryList"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import Posts from "./PostList"
+import Post from "./ViewPost"
+import CreatePost from "./PostForm"
 import "../styles/style.css"
 
 function App() {
-  const {
-    users,
-    sub,
-    subOne,
-    subTwo,
-    subThree,
-    subFour,
-    subFive,
-    subSix,
-    subSeven
-  } = useUsers()
-
-  console.log(users)
-
   return (
     <Router>
-      <Route exact path="/" component={Main} />
+      <div className="maincontainer">
+        <Switch>
+          <Route exact path="/" component={Categories} />
+          <Route exact path="/:slug" component={Posts} />
+          <Route exact path="/:slug/post" component={CreatePost} />
+          <Route exact path="/post/:id" component={Post} />
+        </Switch>
+      </div>
     </Router>
   )
 }
-
 export default App
